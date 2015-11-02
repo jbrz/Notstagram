@@ -10,7 +10,7 @@ export default React.createClass({
     this.props.onAddImage();
   },
 
-  editImageHandler() {
+  editImageHandler(id) {
     this.props.onEditImage();
   },
 
@@ -20,7 +20,7 @@ export default React.createClass({
 
   render(data) {
     return (
-      <div class="viewImage" id={this.props.images.objectId}>
+      <div class="viewImage" id={this.props.image.objectId}>
 
         <div class="header">
           <div class="banner">

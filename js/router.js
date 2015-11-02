@@ -40,7 +40,7 @@ let Router = Backbone.Router.extend({
     }); 
   },
 
-  clickImage(id) {
+  selectImage(id) {
     let image = this.image.toJSON().find(item => item.objectId == id);
     this.navigate('Images/' + id, {trigger: true});
 
@@ -48,7 +48,7 @@ let Router = Backbone.Router.extend({
       <ImagePage
         onHomeClick={() => this.goto('')}
         onBackClick={() => this.goto('')}
-        onImageClick={this.selectImage.bind(this)} 
+        onImageClick={this.selectImage.bind(this)}
         onAddImage={() => this.goto('addImage')}
         onEditImage={() => this.goto('editImage')}
         src={image.imageURL}
@@ -57,30 +57,32 @@ let Router = Backbone.Router.extend({
     )
   },
 
-  drawImage(id){
+  viewImage(id){
     let image = this.images.toJSON().find(imgID => image.objectId === id);
 
     ReactDom.render(<viewImage src={image.imageURL}/>, this.el);
   },
 
   addImage() {
-    this.render(<addImage
-      onHomeClick={() => this.goto('')}
-      onBackClick={() => this.goto('')}
-      onAddImage={() => this.goto('addImage')}
-      onEditImage={() => this.goto('editImage')}
-      onSaveImage={() => {
-          $('#save').click(function() {
+    this.render(
+      <addImage
+        onHomeClick={() => this.goto('')}
+        onBackClick={() => this.goto('')}
+        onAddImage={() => this.goto('addImage')}
+        onEditImage={() => this.goto('editImage')}
+        onSaveImage={
+          () => {
             let newImage = new imageModel ({
               iName: $('#newName').val(),
               imageURL: $('#newURL').val(),
               iDesc: $('#newDesc').val(),
             });
-            newImage.save();
-          });
-        }, 
-      this.goto('')}/>
-    )
+            newImage.save().then(()=>{
+              this.goto('');
+            });
+          }
+        }/>
+    );
   },
 
   editImage(id) {

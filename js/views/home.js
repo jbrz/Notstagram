@@ -55,7 +55,7 @@ export default React.createClass({
           </nav>
         </div>
 
-        <div class="imageTiles">{this.props.images.map(this.processData)} 
+        <div class="imageTiles">{this.props.image.map(this.processData)} 
         </div>
       </div>
     );

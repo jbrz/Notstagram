@@ -222,10 +222,10 @@ var Router = _backbone2['default'].Router.extend({
     });
   },
 
-  clickImage: function clickImage(id) {
+  selectImage: function selectImage(id) {
     var _this2 = this;
 
-    var image = this.images.toJSON().find(function (item) {
+    var image = this.image.toJSON().find(function (item) {
       return item.objectId == id;
     });
     this.navigate('Images/' + id, { trigger: true });
@@ -249,7 +249,7 @@ var Router = _backbone2['default'].Router.extend({
       imageDesc: image.iDesc }));
   },
 
-  drawImage: function drawImage(id) {
+  viewImage: function viewImage(id) {
     var image = this.images.toJSON().find(function (imgID) {
       return image.objectId === id;
     });
@@ -273,16 +273,16 @@ var Router = _backbone2['default'].Router.extend({
       onEditImage: function () {
         return _this3.goto('editImage');
       },
-      onSaveImage: (function () {
-        (0, _jquery2['default'])('#save').click(function () {
-          var newImage = new _resources.imageModel({
-            iName: (0, _jquery2['default'])('#newName').val(),
-            imageURL: (0, _jquery2['default'])('#newURL').val(),
-            iDesc: (0, _jquery2['default'])('#newDesc').val()
-          });
-          newImage.save();
+      onSaveImage: function () {
+        var newImage = new _resources.imageModel({
+          iName: (0, _jquery2['default'])('#newName').val(),
+          imageURL: (0, _jquery2['default'])('#newURL').val(),
+          iDesc: (0, _jquery2['default'])('#newDesc').val()
         });
-      }, this.goto('')) }));
+        newImage.save().then(function () {
+          _this3.goto('');
+        });
+      } }));
   },
 
   editImage: function editImage(id) {
@@ -347,7 +347,7 @@ exports["default"] = _react2["default"].createClass({
     this.props.onAddImage();
   },
 
-  editImageHandler: function editImageHandler() {
+  editImageHandler: function editImageHandler(id) {
     this.props.onEditImage();
   },
 
@@ -360,7 +360,7 @@ exports["default"] = _react2["default"].createClass({
 
     return _react2["default"].createElement(
       "div",
-      { "class": "viewImage", id: this.props.images.objectId },
+      { "class": "viewImage", id: this.props.image.objectId },
       _react2["default"].createElement(
         "div",
         { "class": "header" },
@@ -686,7 +686,7 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'div',
         { 'class': 'imageTiles' },
-        this.props.images.map(this.processData)
+        this.props.image.map(this.processData)
       )
     );
   }
