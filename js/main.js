@@ -10,5 +10,3 @@ let element = document.querySelector('.app');
 
 var router = new Router(element);
 router.start();
-
-window.router = router;

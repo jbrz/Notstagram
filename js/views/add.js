@@ -20,7 +20,7 @@ let addImage = React.createClass({
 
   render(data) {
     return (
-      <div className="viewImage" id={this.props.images.objectId}>
+      <div class="viewImage" id={this.props.images.objectId}>
 
         <div class="header">
           <div class="banner">
@@ -36,20 +36,16 @@ let addImage = React.createClass({
         </div>
 
         <div class="imageWrap">
-          <div class="viewImage">
-            <img className="imagemage" src={this.props.images.imageURL}/>
-          </div>
+          <div class="addImageForm">
+            <form class="addImage">
+              <input type="text" placeholder="Image Title" class="newName"></input>
+              <input type="text" placeholder="Image URL" class="newURL"></input>
+              <textarea type="text" placeholder="Description:" class="newDesc"></textarea>
+            </form>
 
-          <div class="imageText">
-            
-            <div class="title">{this.props.images.iName}
-            </div>
-            <div class="description">{this.props.images.iDesc}
-            </div>
-
-            <div class="imageControls">
+            <div className="saveButtons">
               <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.editImageHandler()}>Edit Image</button>
+              <button onClick={() => this.addImageHandler()}>Upload Image</button>
             </div>
           </div>
         </div>
@@ -59,4 +55,4 @@ let addImage = React.createClass({
 
 });
 
-export default imageView;
+export default addImage;

@@ -1,12 +1,12 @@
 import React from 'react';
 
-let imageView = React.createClass({
+let editImage = React.createClass({
 
   selectImageHandler(id) {
     this.props.onImageSelect(id);
   },
 
-  addImageHandler() {
+  saveImageHandler() {
     this.props.onAddImage();
   },
 
@@ -20,7 +20,7 @@ let imageView = React.createClass({
 
   render(data) {
     return (
-      <div className="viewImage" id={this.props.images.objectId}>
+      <div class="editImage" id={this.props.images.objectId}>
 
         <div class="header">
           <div class="banner">
@@ -36,18 +36,15 @@ let imageView = React.createClass({
         </div>
 
         <div class="imageWrap">
-          <div class="viewImage">
-            <img className="imagemage" src={this.props.images.imageURL}/>
-          </div>
+          <div class="editImage">
+            <form class="editForm">
+              <input class="pullID" type="text" placeholder="{this.props.images.objectId}">{this.props.images.objectId}</input>
+              <input class="pullURL" type="text">{this.props.images.imageURL}</input>
+              <input class="editTitle" type="text" placeholder="">{this.props.images.iName}</input>
+              <textarea class="editDesc" type="text" placeholder="{this.props.images.iDesc}">{this.props.images.iDesc}</textarea>
+            </form>
 
-          <div class="imageText">
-            
-            <div class="title">{this.props.images.iName}
-            </div>
-            <div class="description">{this.props.images.iDesc}
-            </div>
-
-            <div class="imageControls">
+            <div class="saveButtons">
               <button onClick={() => this.addBackHandler()}>Return to Main</button>
               <button onClick={() => this.editImageHandler()}>Edit Image</button>
             </div>
@@ -59,4 +56,4 @@ let imageView = React.createClass({
 
 });
 
-export default imageView;
+export default editImage;

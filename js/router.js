@@ -12,21 +12,21 @@ export default Backbone.Router.extend({
     "image/:id"     : "viewImage",
     "addImage"      : "addImage",
     "editImage/:id" : "editImage"
-  };
+  },
 
   initialize(appElement) {
     this.el = appElement;
     this.image = new imageCollection();
     let router = this;
-  };
+  },
 
     goto(route) {
     this.navigate(route, {trigger: true});
-  };
+  },
 
   render(component) {
     ReactDom.render(component, this.el);
-  };
+  },
 
   home() {
     this.image.fetch().then(() => {
@@ -34,11 +34,11 @@ export default Backbone.Router.extend({
         images={this.image.toJSON()}
         onBackClick={() => this.goto('')}
         onImageClick={this.selectImage.bind(this)}
-        onAddImage={() => this.goto('addImage')}/>
+        onAddImage={() => this.goto('addImage')}
         onEditImage={() => this.goto('editImage')}/>
       );
     }); 
-  };
+  },
 
   clickImage(id) {
     let image = this.photos.toJSON().find(item => item.objectId == id);
@@ -46,8 +46,8 @@ export default Backbone.Router.extend({
 
     this.render(
       <ImagePage
-        onHomeClick={() => this.goto('')};
-        onBackClick={() => this.goto('')};
+        onHomeClick={() => this.goto('')}
+        onBackClick={() => this.goto('')}
         onImageClick={this.selectImage.bind(this)} 
         onAddImage={() => this.goto('addImage')}
         onEditImage={() => this.goto('editImage')}
@@ -55,13 +55,13 @@ export default Backbone.Router.extend({
         imageName={image.iName}
         imageDesc={image.iDesc}/>
     )
-  };
+  },
 
   drawImage(id){
     let image = this.images.toJSON().find(imgID => image.objectId === id);
 
     ReactDom.render(<viewImage src={image.imageURL}/>, this.el);
-  };
+  },
 
   addImage() {
     this.render(<addImage
@@ -78,11 +78,10 @@ export default Backbone.Router.extend({
             });
             newImage.save();
           });
-        };
-        this.goto('');
-      }/>
+        }, 
+      this.goto('')}/>
     )
-  };
+  },
 
   editImage(id) {
     this.render(
@@ -102,9 +101,8 @@ export default Backbone.Router.extend({
             });
             newImage.save();
           });
-        };
-        this.goto('');
-      }/>
+        }, 
+      this.goto('')}/>
     );
   },
 
