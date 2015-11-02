@@ -1,6 +1,6 @@
 import React from 'react';
 
-let editImage = React.createClass({
+export default React.createClass({
 
   selectImageHandler(id) {
     this.props.onImageSelect(id);
@@ -12,7 +12,7 @@ let editImage = React.createClass({
 
   editImageHandler() {
     this.props.onEditImage();
-  }
+  },
 
   addBackHandler() {
     this.props.onBackClick();
@@ -55,5 +55,3 @@ let editImage = React.createClass({
   }
 
 });
-
-export default editImage;

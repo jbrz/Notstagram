@@ -6,7 +6,7 @@ import _ from 'underscore';
 import {imageCollection,imageModel} from './resources';
 import {homeView,imageView,addImage,editImage} from './views'
 
-export default Backbone.Router.extend({
+let Router = Backbone.Router.extend({
   routes: {
     ""              : "home",
     "image/:id"     : "viewImage",
@@ -41,7 +41,7 @@ export default Backbone.Router.extend({
   },
 
   clickImage(id) {
-    let image = this.photos.toJSON().find(item => item.objectId == id);
+    let image = this.image.toJSON().find(item => item.objectId == id);
     this.navigate('Images/' + id, {trigger: true});
 
     this.render(
@@ -90,7 +90,6 @@ export default Backbone.Router.extend({
       onBackClick={() => this.goto('')}
       onAddImage={() => this.goto('addImage')}
       onEditImage={() => this.goto('editImage')}
-      let image = this.photos.toJSON().find(item => item.objectId == id);
       onSaveEdit={() => {
           $('#edit').click(function() {
             let editImage = new imageModel ({
@@ -106,4 +105,10 @@ export default Backbone.Router.extend({
     );
   },
 
-};
+  start() {
+    Backbone.history.start();
+  }
+
+});
+
+export default Router;

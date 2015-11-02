@@ -1,8 +1,10 @@
-export default 
+import React from 'react';
+import _ from 'underscore';
+import imageView from './image';
+import editImage from './edit';
+import addImage from './add';
 
-
-
-let homeView = React.createClass({
+export default React.createClass({
 
 
   selectImageHandler(id) {
@@ -11,6 +13,10 @@ let homeView = React.createClass({
 
   addImageHandler() {
     this.props.onAddImage();
+  },
+  
+  editImageHandler() {
+    this.props.onEditImage();
   },
 
   processData(data) {
@@ -55,5 +61,3 @@ let homeView = React.createClass({
     );
   }
 });
-
-export default homeView;
