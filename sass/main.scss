@@ -2,6 +2,8 @@
 @import "neat";
 @import "font-awesome";
 
+$grey: #555555;
+
 body {
   background: #ffffff;
 }
@@ -53,7 +55,7 @@ button{
 .imageThumbs {
   max-height: 250px;
   max-width: 250px;
-  border: 1px solid #555555;
+  border: 1px solid $grey;
   border-radius: 5px;
   margin-left: 5%;
   margin-right: 5%;
@@ -76,6 +78,27 @@ button{
     }
     .description {
 
+    }
+  }
+
+  .addImageForm {
+
+
+    .addForm {
+      border: 2px solid $grey;
+      max-width: 50%;
+      margin: 0 auto;
+
+      input {
+        min-height: 15px;
+        padding: 3px;
+        margin-top: 8px;
+      }
+
+      textarea {
+        padding: 3px;
+        margin-top: 8px; 
+      }
     }
   }
 
