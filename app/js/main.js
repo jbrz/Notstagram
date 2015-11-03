@@ -49,8 +49,7 @@ var _router2 = _interopRequireDefault(_router);
 
 var element = document.querySelector('.app');
 
-var router = new _router2['default'](element);
-router.start();
+new _router2['default'](element).start();
 
 },{"./ajaxSetup":1,"./router":7,"jquery":16,"moment":17,"react":174,"react-dom":18,"underscore":175}],3:[function(require,module,exports){
 'use strict';
@@ -79,17 +78,17 @@ var _backbone = require('backbone');
 
 var _backbone2 = _interopRequireDefault(_backbone);
 
-var _imageModel = require('./imageModel');
+var _imageModelJs = require('./imageModel.js');
 
-var _imageModel2 = _interopRequireDefault(_imageModel);
+var _imageModelJs2 = _interopRequireDefault(_imageModelJs);
 
-var _parseData = require('../parseData');
+var _parseDataJs = require('../parseData.js');
 
 var imageCollection = _backbone2['default'].Collection.extend({
 
-  url: _parseData.APP_URL,
+  url: _parseDataJs.APP_URL,
 
-  model: _imageModel2['default'],
+  model: _imageModelJs2['default'],
 
   parse: function parse(data) {
     return data.results;
@@ -100,7 +99,7 @@ var imageCollection = _backbone2['default'].Collection.extend({
 exports['default'] = imageCollection;
 module.exports = exports['default'];
 
-},{"../parseData":3,"./imageModel":5,"backbone":14}],5:[function(require,module,exports){
+},{"../parseData.js":3,"./imageModel.js":5,"backbone":14}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -113,11 +112,11 @@ var _Backbone = require('Backbone');
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _parseData = require('../parseData');
+var _parseDataJs = require('../parseData.js');
 
 var imageModel = _Backbone2['default'].Model.extend({
 
-  urlRoot: _parseData.APP_URL,
+  urlRoot: _parseDataJs.APP_URL,
   idAttribute: 'objectId',
   templateData: function templateData() {
     var data = this.toJSON();
@@ -128,7 +127,7 @@ var imageModel = _Backbone2['default'].Model.extend({
 exports['default'] = imageModel;
 module.exports = exports['default'];
 
-},{"../parseData":3,"Backbone":13}],6:[function(require,module,exports){
+},{"../parseData.js":3,"Backbone":13}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -137,18 +136,18 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _imageCollection = require('./imageCollection');
+var _imageCollectionJs = require('./imageCollection.js');
 
-var _imageCollection2 = _interopRequireDefault(_imageCollection);
+var _imageCollectionJs2 = _interopRequireDefault(_imageCollectionJs);
 
-var _imageModel = require('./imageModel');
+var _imageModelJs = require('./imageModel.js');
 
-var _imageModel2 = _interopRequireDefault(_imageModel);
+var _imageModelJs2 = _interopRequireDefault(_imageModelJs);
 
-exports.imageCollection = _imageCollection2['default'];
-exports.imageModel = _imageModel2['default'];
+exports.imageCollection = _imageCollectionJs2['default'];
+exports.imageModel = _imageModelJs2['default'];
 
-},{"./imageCollection":4,"./imageModel":5}],7:[function(require,module,exports){
+},{"./imageCollection.js":4,"./imageModel.js":5}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -207,7 +206,7 @@ var Router = _backbone2['default'].Router.extend({
     var _this = this;
 
     this.image.fetch().then(function () {
-      _this.render(_react2['default'].createElement('homeView', {
+      _this.render(_react2['default'].createElement('home', {
         images: _this.image.toJSON(),
         onBackClick: function () {
           return _this.goto('');
@@ -226,11 +225,11 @@ var Router = _backbone2['default'].Router.extend({
     var _this2 = this;
 
     var image = this.image.toJSON().find(function (item) {
-      return item.objectId == id;
+      return item.objectId === id;
     });
-    this.navigate('Images/' + id, { trigger: true });
+    this.navigate('viewImage/' + id, { trigger: true });
 
-    this.render(_react2['default'].createElement(ImagePage, {
+    this.render(_react2['default'].createElement('viewImage', {
       onHomeClick: function () {
         return _this2.goto('');
       },
@@ -249,14 +248,6 @@ var Router = _backbone2['default'].Router.extend({
       imageDesc: image.iDesc }));
   },
 
-  viewImage: function viewImage(id) {
-    var image = this.images.toJSON().find(function (imgID) {
-      return image.objectId === id;
-    });
-
-    _reactDom2['default'].render(_react2['default'].createElement('viewImage', { src: image.imageURL }), this.el);
-  },
-
   addImage: function addImage() {
     var _this3 = this;
 
@@ -267,13 +258,13 @@ var Router = _backbone2['default'].Router.extend({
       onBackClick: function () {
         return _this3.goto('');
       },
-      onAddImage: function () {
+      onAddImageClick: function () {
         return _this3.goto('addImage');
       },
-      onEditImage: function () {
+      onEditImageClick: function () {
         return _this3.goto('editImage');
       },
-      onSaveImage: function () {
+      onSaveImageClick: function () {
         var newImage = new _resources.imageModel({
           iName: (0, _jquery2['default'])('#newName').val(),
           imageURL: (0, _jquery2['default'])('#newURL').val(),
@@ -288,30 +279,30 @@ var Router = _backbone2['default'].Router.extend({
   editImage: function editImage(id) {
     var _this4 = this;
 
-    this.render(_react2['default'].createElement(EditImage, {
+    this.render(_react2['default'].createElement('editImage', {
       onHomeClick: function () {
         return _this4.goto('');
       },
       onBackClick: function () {
         return _this4.goto('');
       },
-      onAddImage: function () {
+      onAddImageClick: function () {
         return _this4.goto('addImage');
       },
-      onEditImage: function () {
+      onEditImageClick: function () {
         return _this4.goto('editImage');
       },
-      onSaveEdit: (function () {
-        (0, _jquery2['default'])('#edit').click(function () {
-          var editImage = new _resources.imageModel({
-            objectId: item.objectId,
-            iName: (0, _jquery2['default'])('#newName').val(),
-            imageURL: (0, _jquery2['default'])('#newURL').val(),
-            iDesc: (0, _jquery2['default'])('#newDesc').val()
-          });
-          newImage.save();
+      onSaveImageClick: function () {
+        var editImage = new _resources.imageModel({
+          objectId: item.objectId,
+          iName: (0, _jquery2['default'])('#newName').val(),
+          imageURL: (0, _jquery2['default'])('#newURL').val(),
+          iDesc: (0, _jquery2['default'])('#newDesc').val()
         });
-      }, this.goto('')) }));
+        editImage.save().then(function () {
+          _this4.goto('');
+        });
+      } }));
   },
 
   start: function start() {
@@ -339,20 +330,20 @@ var _react2 = _interopRequireDefault(_react);
 exports["default"] = _react2["default"].createClass({
   displayName: "add",
 
-  selectImageHandler: function selectImageHandler(id) {
-    this.props.onImageSelect(id);
+  saveImageHandler: function saveImageHandler() {
+    this.props.onSaveImage();
   },
 
   addImageHandler: function addImageHandler() {
     this.props.onAddImage();
   },
 
-  editImageHandler: function editImageHandler(id) {
-    this.props.onEditImage();
-  },
-
   addBackHandler: function addBackHandler() {
     this.props.onBackClick();
+  },
+
+  addHomeHandler: function addHomeHandler() {
+    this.props.onHomeClick();
   },
 
   render: function render(data) {
@@ -360,7 +351,7 @@ exports["default"] = _react2["default"].createClass({
 
     return _react2["default"].createElement(
       "div",
-      { "class": "viewImage", id: this.props.image.objectId },
+      { "class": "viewImage", id: this.props.images.objectId },
       _react2["default"].createElement(
         "div",
         { "class": "header" },
@@ -408,7 +399,7 @@ exports["default"] = _react2["default"].createClass({
           { "class": "addImageForm" },
           _react2["default"].createElement(
             "form",
-            { "class": "addImage" },
+            { "class": "addForm" },
             _react2["default"].createElement("input", { type: "text", placeholder: "Image Title", "class": "newName" }),
             _react2["default"].createElement("input", { type: "text", placeholder: "Image URL", "class": "newURL" }),
             _react2["default"].createElement("textarea", { type: "text", placeholder: "Description:", "class": "newDesc" })
@@ -426,7 +417,7 @@ exports["default"] = _react2["default"].createClass({
             _react2["default"].createElement(
               "button",
               { onClick: function () {
-                  return _this.addImageHandler();
+                  return _this.saveImageHandler();
                 } },
               "Upload Image"
             )
@@ -455,16 +446,16 @@ var _react2 = _interopRequireDefault(_react);
 exports["default"] = _react2["default"].createClass({
   displayName: "edit",
 
-  selectImageHandler: function selectImageHandler(id) {
-    this.props.onImageSelect(id);
-  },
-
   saveImageHandler: function saveImageHandler() {
     this.props.onAddImage();
   },
 
-  editImageHandler: function editImageHandler() {
-    this.props.onEditImage();
+  addHomeHandler: function addHomeHandler() {
+    this.props.onHomeClick();
+  },
+
+  addImageHandler: function addImageHandler() {
+    this.props.onAddImage();
   },
 
   addBackHandler: function addBackHandler() {
@@ -521,7 +512,7 @@ exports["default"] = _react2["default"].createClass({
         { "class": "imageWrap" },
         _react2["default"].createElement(
           "div",
-          { "class": "editImage" },
+          { "class": "editImageForm" },
           _react2["default"].createElement(
             "form",
             { "class": "editForm" },
@@ -559,7 +550,7 @@ exports["default"] = _react2["default"].createClass({
             _react2["default"].createElement(
               "button",
               { onClick: function () {
-                  return _this.editImageHandler();
+                  return _this.saveImageHandler();
                 } },
               "Edit Image"
             )
@@ -604,6 +595,10 @@ var _add2 = _interopRequireDefault(_add);
 exports['default'] = _react2['default'].createClass({
   displayName: 'home',
 
+  addHomeHandler: function addHomeHandler() {
+    this.props.onHomeClick();
+  },
+
   selectImageHandler: function selectImageHandler(id) {
     this.props.onImageSelect(id);
   },
@@ -614,6 +609,10 @@ exports['default'] = _react2['default'].createClass({
 
   editImageHandler: function editImageHandler() {
     this.props.onEditImage();
+  },
+
+  addBackHandler: function addBackHandler() {
+    this.props.onBackClick();
   },
 
   processData: function processData(data) {
@@ -630,31 +629,23 @@ exports['default'] = _react2['default'].createClass({
     );
   },
 
-  addHomeHandler: function addHomeHandler() {
-    this.props.onHomeClick();
-  },
-
-  addBackHandler: function addBackHandler() {
-    this.props.onBackClick();
-  },
-
   render: function render() {
     var _this2 = this;
 
     return _react2['default'].createElement(
       'div',
-      { 'class': 'home wrapper' },
+      { className: 'home wrapper' },
       _react2['default'].createElement(
         'div',
-        { 'class': 'header' },
+        { className: 'header' },
         _react2['default'].createElement(
           'div',
-          { 'class': 'banner' },
+          { className: 'banner' },
           _react2['default'].createElement('img', { src: './images/Notstagram.jpg' })
         ),
         _react2['default'].createElement(
           'nav',
-          { 'class': 'navbar' },
+          { className: 'navbar' },
           _react2['default'].createElement(
             'ul',
             null,
@@ -665,7 +656,7 @@ exports['default'] = _react2['default'].createClass({
                 } },
               _react2['default'].createElement(
                 'button',
-                { 'class': 'home' },
+                { className: 'home' },
                 'Home'
               )
             ),
@@ -676,7 +667,7 @@ exports['default'] = _react2['default'].createClass({
                 } },
               _react2['default'].createElement(
                 'button',
-                { 'class': 'addImage' },
+                { className: 'addImage' },
                 'Upload Image(s)'
               )
             )
@@ -685,8 +676,8 @@ exports['default'] = _react2['default'].createClass({
       ),
       _react2['default'].createElement(
         'div',
-        { 'class': 'imageTiles' },
-        this.props.image.map(this.processData)
+        { 'class': 'imageThumbs' },
+        this.props.images.map(this.processData)
       )
     );
   }
@@ -776,21 +767,7 @@ exports["default"] = _react2["default"].createClass({
         _react2["default"].createElement(
           "div",
           { "class": "viewImage" },
-          _react2["default"].createElement("img", { className: "imagemage", src: this.props.images.imageURL })
-        ),
-        _react2["default"].createElement(
-          "div",
-          { "class": "imageText" },
-          _react2["default"].createElement(
-            "div",
-            { "class": "title" },
-            this.props.images.iName
-          ),
-          _react2["default"].createElement(
-            "div",
-            { "class": "description" },
-            this.props.images.iDesc
-          ),
+          _react2["default"].createElement("img", { className: "imagemage", src: this.props.images.imageURL }),
           _react2["default"].createElement(
             "div",
             { "class": "imageControls" },
@@ -808,6 +785,20 @@ exports["default"] = _react2["default"].createClass({
                 } },
               "Edit Image"
             )
+          )
+        ),
+        _react2["default"].createElement(
+          "div",
+          { "class": "imageText" },
+          _react2["default"].createElement(
+            "div",
+            { "class": "title" },
+            this.props.images.iName
+          ),
+          _react2["default"].createElement(
+            "div",
+            { "class": "description" },
+            this.props.images.iDesc
           )
         )
       )

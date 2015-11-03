@@ -38,6 +38,10 @@ export default React.createClass({
         <div class="imageWrap">
           <div class="viewImage">
             <img className="imagemage" src={this.props.images.imageURL}/>
+            <div class="imageControls">
+              <button onClick={() => this.addBackHandler()}>Return to Main</button>
+              <button onClick={() => this.editImageHandler()}>Edit Image</button>
+            </div>
           </div>
 
           <div class="imageText">
@@ -45,11 +49,6 @@ export default React.createClass({
             <div class="title">{this.props.images.iName}
             </div>
             <div class="description">{this.props.images.iDesc}
-            </div>
-
-            <div class="imageControls">
-              <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.editImageHandler()}>Edit Image</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import Backbone from 'backbone';
-import imageModel from './imageModel';
-import {APP_URL} from '../parseData';
+import imageModel from './imageModel.js';
+import {APP_URL} from '../parseData.js';
 
 let imageCollection = Backbone.Collection.extend({
 

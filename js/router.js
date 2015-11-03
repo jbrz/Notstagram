@@ -30,7 +30,7 @@ let Router = Backbone.Router.extend({
 
   home() {
     this.image.fetch().then(() => {
-      this.render(<homeView 
+      this.render(<home 
         images={this.image.toJSON()}
         onBackClick={() => this.goto('')}
         onImageClick={this.selectImage.bind(this)}
@@ -41,11 +41,11 @@ let Router = Backbone.Router.extend({
   },
 
   selectImage(id) {
-    let image = this.image.toJSON().find(item => item.objectId == id);
-    this.navigate('Images/' + id, {trigger: true});
+    let image = this.image.toJSON().find(item => item.objectId === id);
+    this.navigate('viewImage/' + id, {trigger: true});
 
     this.render(
-      <ImagePage
+      <viewImage
         onHomeClick={() => this.goto('')}
         onBackClick={() => this.goto('')}
         onImageClick={this.selectImage.bind(this)}
@@ -57,20 +57,14 @@ let Router = Backbone.Router.extend({
     )
   },
 
-  viewImage(id){
-    let image = this.images.toJSON().find(imgID => image.objectId === id);
-
-    ReactDom.render(<viewImage src={image.imageURL}/>, this.el);
-  },
-
   addImage() {
     this.render(
       <addImage
         onHomeClick={() => this.goto('')}
         onBackClick={() => this.goto('')}
-        onAddImage={() => this.goto('addImage')}
-        onEditImage={() => this.goto('editImage')}
-        onSaveImage={
+        onAddImageClick={() => this.goto('addImage')}
+        onEditImageClick={() => this.goto('editImage')}
+        onSaveImageClick={
           () => {
             let newImage = new imageModel ({
               iName: $('#newName').val(),
@@ -87,23 +81,24 @@ let Router = Backbone.Router.extend({
 
   editImage(id) {
     this.render(
-      <EditImage
-      onHomeClick={() => this.goto('')}
-      onBackClick={() => this.goto('')}
-      onAddImage={() => this.goto('addImage')}
-      onEditImage={() => this.goto('editImage')}
-      onSaveEdit={() => {
-          $('#edit').click(function() {
+      <editImage
+        onHomeClick={() => this.goto('')}
+        onBackClick={() => this.goto('')}
+        onAddImageClick={() => this.goto('addImage')}
+        onEditImageClick={() => this.goto('editImage')}
+        onSaveImageClick={
+          () => {
             let editImage = new imageModel ({
               objectId: item.objectId,
               iName: $('#newName').val(),
               imageURL: $('#newURL').val(),
               iDesc: $('#newDesc').val(),
             });
-            newImage.save();
-          });
-        }, 
-      this.goto('')}/>
+            editImage.save().then(()=>{
+              this.goto('');
+            });
+          }
+        }/>
     );
   },
 

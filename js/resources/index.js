@@ -1,4 +1,4 @@
-import imageCollection from './imageCollection';
-import imageModel from './imageModel';
+import imageCollection from './imageCollection.js';
+import imageModel from './imageModel.js';
 
 export {imageCollection,imageModel};

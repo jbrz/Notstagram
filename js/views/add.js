@@ -2,25 +2,25 @@ import React from 'react';
 
 export default React.createClass({
 
-  selectImageHandler(id) {
-    this.props.onImageSelect(id);
+  saveImageHandler() {
+    this.props.onSaveImage();
   },
 
   addImageHandler() {
     this.props.onAddImage();
   },
 
-  editImageHandler(id) {
-    this.props.onEditImage();
-  },
-
   addBackHandler() {
     this.props.onBackClick();
   },
 
+  addHomeHandler() {
+    this.props.onHomeClick();
+  },
+
   render(data) {
     return (
-      <div class="viewImage" id={this.props.image.objectId}>
+      <div class="viewImage" id={this.props.images.objectId}>
 
         <div class="header">
           <div class="banner">
@@ -37,7 +37,7 @@ export default React.createClass({
 
         <div class="imageWrap">
           <div class="addImageForm">
-            <form class="addImage">
+            <form class="addForm">
               <input type="text" placeholder="Image Title" class="newName"></input>
               <input type="text" placeholder="Image URL" class="newURL"></input>
               <textarea type="text" placeholder="Description:" class="newDesc"></textarea>
@@ -45,7 +45,7 @@ export default React.createClass({
 
             <div className="saveButtons">
               <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.addImageHandler()}>Upload Image</button>
+              <button onClick={() => this.saveImageHandler()}>Upload Image</button>
             </div>
           </div>
         </div>

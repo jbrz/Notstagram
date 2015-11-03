@@ -2025,7 +2025,7 @@ html {
   content: ""; }
 
 body {
-  background: #000000; }
+  background: #ffffff; }
 
 a {
   text-decoration: none;
@@ -2056,5 +2056,24 @@ button {
         text-align: center;
         padding-bottom: 5px;
         padding-top: 5px; }
+
+.imageThumbs {
+  max-height: 250px;
+  max-width: 250px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-right: 5%; }
+
+.imageWrap {
+  width: 100%; }
+  .imageWrap .viewImage {
+    max-width: 50%; }
+  .imageWrap .imageText {
+    max-width: 50%; }
+    .imageWrap .imageText div {
+      margin: 15px 5% 0 5%; }
+    .imageWrap .imageText .title {
+      font-size: 2em; }
 
 /*# sourceMappingURL=main.css.map */

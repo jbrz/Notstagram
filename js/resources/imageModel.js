@@ -1,5 +1,5 @@
 import Backbone from 'Backbone';
-import {APP_URL} from '../parseData';
+import {APP_URL} from '../parseData.js';
 
 let imageModel = Backbone.Model.extend({
 

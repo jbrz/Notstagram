@@ -6,6 +6,9 @@ import addImage from './add';
 
 export default React.createClass({
 
+  addHomeHandler() {
+    this.props.onHomeClick();
+  },
 
   selectImageHandler(id) {
     this.props.onImageSelect(id);
@@ -19,6 +22,10 @@ export default React.createClass({
     this.props.onEditImage();
   },
 
+  addBackHandler() {
+    this.props.onBackClick();
+  },
+
   processData(data) {
     return (
       <div id={data.objectId} 
@@ -30,32 +37,23 @@ export default React.createClass({
     );
   },
 
-  addHomeHandler() {
-    this.props.onHomeClick();
-  },
-
-  addBackHandler() {
-    this.props.onBackClick();
-  },
-
   render() {
     return (
-      <div class="home wrapper">
-
-        <div class="header">
-          <div class="banner">
+      <div className="home wrapper">
+        <div className="header">
+          <div className="banner">
             <img src="./images/Notstagram.jpg"/>
           </div>
 
-          <nav class="navbar">
+          <nav className="navbar">
             <ul>
-              <li onClick={()=> this.addHomeHandler()}><button class="home">Home</button></li>
-              <li onClick={()=> this.addImageHandler()}><button class="addImage">Upload Image(s)</button></li>
+              <li onClick={()=> this.addHomeHandler()}><button className="home">Home</button></li>
+              <li onClick={()=> this.addImageHandler()}><button className="addImage">Upload Image(s)</button></li>
             </ul>
           </nav>
         </div>
 
-        <div class="imageTiles">{this.props.image.map(this.processData)} 
+        <div class="imageThumbs">{this.props.images.map(this.processData)} 
         </div>
       </div>
     );

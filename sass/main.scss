@@ -3,7 +3,7 @@
 @import "font-awesome";
 
 body {
-  background: #000000;
+  background: #ffffff;
 }
 
 a {
@@ -48,4 +48,35 @@ button{
       }
     }
   }
+}
+
+.imageThumbs {
+  max-height: 250px;
+  max-width: 250px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.imageWrap {
+  width: 100%;
+
+  .viewImage {
+    max-width: 50%;
+  }
+  .imageText {
+    max-width: 50%;
+
+    div {
+      margin: 15px 5% 0 5%;
+    }
+    .title {
+      font-size: 2em;
+    }
+    .description {
+
+    }
+  }
+
 }

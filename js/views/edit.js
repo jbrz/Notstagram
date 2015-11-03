@@ -2,16 +2,16 @@ import React from 'react';
 
 export default React.createClass({
 
-  selectImageHandler(id) {
-    this.props.onImageSelect(id);
-  },
-
   saveImageHandler() {
     this.props.onAddImage();
   },
+  
+  addHomeHandler() {
+    this.props.onHomeClick();
+  },
 
-  editImageHandler() {
-    this.props.onEditImage();
+  addImageHandler() {
+    this.props.onAddImage();
   },
 
   addBackHandler() {
@@ -36,7 +36,7 @@ export default React.createClass({
         </div>
 
         <div class="imageWrap">
-          <div class="editImage">
+          <div class="editImageForm">
             <form class="editForm">
               <input class="pullID" type="text" placeholder="{this.props.images.objectId}">{this.props.images.objectId}</input>
               <input class="pullURL" type="text">{this.props.images.imageURL}</input>
@@ -46,7 +46,7 @@ export default React.createClass({
 
             <div class="saveButtons">
               <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.editImageHandler()}>Edit Image</button>
+              <button onClick={() => this.saveImageHandler()}>Edit Image</button>
             </div>
           </div>
         </div>
