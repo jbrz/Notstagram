@@ -20,33 +20,33 @@ export default React.createClass({
 
   render(data) {
     return (
-      <div class="viewImage" id={this.props.images.objectId}>
+      <div className="addImage">
 
-        <div class="header">
-          <div class="banner">
+        <div className="header">
+          <div className="banner">
             <img src="./images/Notstagram.jpg"/>
           </div>
 
-          <nav class="navbar">
+          <nav className="navbar">
             <ul>
-              <li onClick={()=> this.addHomeHandler()}><button class="home">Home</button></li>
-              <li onClick={()=> this.addImageHandler()}><button class="addImage">Upload Image(s)</button></li>
+              <li onClick={()=> this.addHomeHandler()}><button className="home">Home</button></li>
+              <li onClick={()=> this.addImageHandler()}><button className="addImage">Add New Image(s)</button></li>
             </ul>
           </nav>
         </div>
 
-        <div class="imageWrap">
-          <div class="addImageForm">
-            <form class="addForm">
-              <input type="text" placeholder="Image Title" class="newName"></input>
-              <input type="text" placeholder="Image URL" class="newURL"></input>
-              <textarea type="text" placeholder="Description:" class="newDesc"></textarea>
+        <div className="imageWrap">
+          <div className="addImageForm">
+            <form className="addForm">
+              <input type="text" placeholder="Image Title" className="newName"></input>
+              <input type="text" placeholder="Image URL" className="newURL"></input>
+              <input type="textarea" placeholder="Description:" className="newDesc"></input>
+              <div className="saveButtons">
+                <button onClick={() => this.addBackHandler()}>Return to Main</button>
+                <button onClick={() => this.saveImageHandler()}>Upload Image</button>
+              </div>
             </form>
 
-            <div className="saveButtons">
-              <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.saveImageHandler()}>Upload Image</button>
-            </div>
           </div>
         </div>
       </div>

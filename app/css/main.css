@@ -2025,7 +2025,16 @@ html {
   content: ""; }
 
 body {
-  background: #ffffff; }
+  background: #ffffff;
+  height: 100%; }
+  body .app {
+    height: 100%; }
+    body .app .imageView {
+      height: 100%; }
+      body .app .imageView .imageWrap {
+        height: 100%; }
+        body .app .imageView .imageWrap .viewImage {
+          height: 100%; }
 
 a {
   text-decoration: none;
@@ -2038,53 +2047,95 @@ button {
   border: none; }
 
 .header {
-  width: 100%; }
-  .header .banner {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 500px; }
-    .header .banner img {
-      border-radius: 15px; }
+  max-width: 100%;
+  margin: 0 auto; }
+  .header div.banner {
+    margin: 0 auto;
+    max-width: 100%; }
+    .header div.banner img {
+      display: block;
+      border-radius: 15px;
+      margin: 5px auto; }
   .header .navbar {
     height: 40px;
     width: 100%; }
     .header .navbar ul {
-      margin-left: auto;
-      margin-right: auto; }
+      margin: 0 auto;
+      padding: 0;
+      list-style-position: none; }
+      .header .navbar ul li {
+        display: inline-block;
+        margin-left: 28%; }
       .header .navbar ul button {
         max-width: 180px;
         text-align: center;
         padding-bottom: 5px;
         padding-top: 5px; }
 
-.imageThumbs {
-  max-height: 250px;
-  max-width: 250px;
-  border: 1px solid #555555;
-  border-radius: 5px;
-  margin-left: 5%;
-  margin-right: 5%; }
+.wrapper {
+  max-width: 60%;
+  margin-right: auto;
+  margin-left: auto; }
+
+.imageThumbList {
+  display: inline-block; }
+  .imageThumbList .imageThumb {
+    border: 1px solid #777777;
+    border-radius: 5px;
+    display: inline-block;
+    height: 250px;
+    max-width: 250px;
+    margin: 5px 2% 5px 2%;
+    overflow: hidden;
+    vertical-align: middle; }
+    .imageThumbList .imageThumb img {
+      max-width: 100%; }
 
 .imageWrap {
-  width: 100%; }
+  width: 80%;
+  margin: 10px 10% 10px 10%;
+  display: inline-block; }
   .imageWrap .viewImage {
-    max-width: 50%; }
+    display: inline-block;
+    max-width: 40%; }
+    .imageWrap .viewImage img {
+      max-width: 100%;
+      margin: 0 auto; }
+    .imageWrap .viewImage button {
+      margin-right: 20%; }
   .imageWrap .imageText {
-    max-width: 50%; }
+    display: inline-block;
+    max-width: 40%; }
     .imageWrap .imageText div {
       margin: 15px 5% 0 5%; }
     .imageWrap .imageText .title {
       font-size: 2em; }
   .imageWrap .addImageForm .addForm {
-    border: 2px solid #555555;
+    border: 2px solid #777777;
     max-width: 50%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    border-radius: 3px; }
     .imageWrap .addImageForm .addForm input {
       min-height: 15px;
+      width: 75%;
       padding: 3px;
-      margin-top: 8px; }
-    .imageWrap .addImageForm .addForm textarea {
-      padding: 3px;
-      margin-top: 8px; }
+      margin: 6px 5% 6px 10%; }
+    .imageWrap .addImageForm .addForm .newDesc {
+      min-height: 100px; }
+  .imageWrap .addImageForm button {
+    display: block;
+    margin: 0 auto; }
+  .imageWrap .editImageForm .editForm {
+    width: 60%;
+    border: 2px solid #777777;
+    margin: 0 auto; }
+    .imageWrap .editImageForm .editForm input {
+      width: 75%;
+      margin: 5px auto; }
+  .imageWrap .editImageForm .saveButtons {
+    width: 60%;
+    margin: 0 auto; }
+    .imageWrap .editImageForm .saveButtons button {
+      margin: 5px 15% 5px 15%; }
 
 /*# sourceMappingURL=main.css.map */

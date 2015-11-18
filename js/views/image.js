@@ -10,8 +10,8 @@ export default React.createClass({
     this.props.onAddImage();
   },
 
-  editImageHandler() {
-    this.props.onEditImage();
+  editImageHandler(id) {
+    this.props.onEditImage(id);
   },
 
   addBackHandler() {
@@ -20,35 +20,34 @@ export default React.createClass({
 
   render(data) {
     return (
-      <div className="viewImage" id={this.props.images.objectId}>
+      <div className="imageView" id={this.props.id}>
 
-        <div class="header">
-          <div class="banner">
+        <div className="header">
+          <div className="banner">
             <img src="./images/Notstagram.jpg"/>
           </div>
-
-          <nav class="navbar">
-            <ul>
-              <li onClick={()=> this.addHomeHandler()}><button class="home">Home</button></li>
-              <li onClick={()=> this.addImageHandler()}><button class="addImage">Upload Image(s)</button></li>
-            </ul>
-          </nav>
+            <nav className="navbar">
+              <ul>
+               <li onClick={()=> this.addHomeHandler()}><button className="home">Home</button></li>
+               <li onClick={()=> this.addImageHandler()}><button className="addImage">Upload Image(s)</button></li>
+             </ul>
+            </nav>
         </div>
 
-        <div class="imageWrap">
-          <div class="viewImage">
-            <img className="imagemage" src={this.props.images.imageURL}/>
-            <div class="imageControls">
+        <div className="imageWrap">
+          <div className="viewImage">
+            <img className="imagemage" src={this.props.src}/>
+            <div className="imageControls">
               <button onClick={() => this.addBackHandler()}>Return to Main</button>
-              <button onClick={() => this.editImageHandler()}>Edit Image</button>
+              <button onClick={() => this.editImageHandler(this.props.id)}>Edit Image</button>
             </div>
           </div>
 
-          <div class="imageText">
+          <div className="imageText">
             
-            <div class="title">{this.props.images.iName}
+            <div className="title">{this.props.imageName}
             </div>
-            <div class="description">{this.props.images.iDesc}
+            <div className="description">{this.props.imageDesc}
             </div>
           </div>
         </div>

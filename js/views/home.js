@@ -11,15 +11,15 @@ export default React.createClass({
   },
 
   selectImageHandler(id) {
-    this.props.onImageSelect(id);
+    this.props.selectImage(id);
   },
 
   addImageHandler() {
-    this.props.onAddImage();
+    this.props.AddImage();
   },
   
   editImageHandler() {
-    this.props.onEditImage();
+    this.props.onEditImageClick();
   },
 
   addBackHandler() {
@@ -29,7 +29,7 @@ export default React.createClass({
   processData(data) {
     return (
       <div id={data.objectId} 
-        onClick={() => this.selectImageHandler(data.objectId)} className="list home">
+        onClick={() => this.selectImageHandler(data.objectId)} className="list imageThumb">
         
         <img className="image" 
         src={data.imageURL}/>
@@ -48,12 +48,12 @@ export default React.createClass({
           <nav className="navbar">
             <ul>
               <li onClick={()=> this.addHomeHandler()}><button className="home">Home</button></li>
-              <li onClick={()=> this.addImageHandler()}><button className="addImage">Upload Image(s)</button></li>
+              <li onClick={()=> this.addImageHandler()}><button className="addImage">Add Image(s)</button></li>
             </ul>
           </nav>
         </div>
 
-        <div class="imageThumbs">{this.props.images.map(this.processData)} 
+        <div className="imageThumbList">{this.props.images.map(this.processData)} 
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
-import homeView from './home.js';
-import imageView from './image.js';
-import addImage from './add.js';
-import editImage from './edit.js';
+import HomeView from './home.js';
+import ViewImage from './image.js';
+import AddImage from './add.js';
+import EditImage from './edit.js';
 
 
-export {homeView,imageView,addImage,editImage}
+export {HomeView,ViewImage,AddImage,EditImage}
